@@ -1,0 +1,40 @@
+REM Taunt the User. Possibly their orgs DFIR team.
+DEFAULT_DELAY 175
+
+REM Open windows notepad and write file
+DELAY 1000
+GUI r
+STRING notepad
+ENTER
+STRING Dim message
+ENTER
+STRING message = "g3t r3kt."
+ENTER
+STRING title = "You've been pwned by the best."
+ENTER
+STRING MsgBox message, 48, title
+ENTER
+
+REM save and exit
+CTRL s
+DELAY 200
+STRING v1ru5.vbs
+ENTER
+DELAY 250
+ALT F4
+
+REM run in PS
+GUI r
+
+REM Execute payload 
+STRING powershell
+ENTER
+DELAY 150
+STRING .\Desktop\v1ru5.vbs
+ENTER
+DELAY 250
+ALT TAB
+STRING exit
+ENTER
+
+
