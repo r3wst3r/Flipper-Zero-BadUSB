@@ -1,4 +1,4 @@
-REM Taunt the User. Possibly their orgs DFIR team.
+REM Taunt the User. Possibly their orgs DFIR team. Use responsibly, meaning only on machines you have permession to pwn/r3k. 
 DEFAULT_DELAY 175
 
 REM Open windows notepad and write file
